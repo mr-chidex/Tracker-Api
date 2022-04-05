@@ -2,6 +2,8 @@ import express, { Application, Request, Response, NextFunction } from "express";
 import morgan from "morgan";
 import dotenv from "dotenv";
 
+import userRoutes from "./routes/user";
+
 const app: Application = express();
 dotenv.config();
 const apiVersion = process.env.API_VERSION || "v1";
@@ -9,12 +11,14 @@ const apiVersion = process.env.API_VERSION || "v1";
 app.use(express.json());
 app.use(morgan("dev"));
 
+app.use(`/api/${apiVersion}/users`, userRoutes);
+
 app.use("/", (_: Request, res: Response) => {
   res.json({
     success: true,
     name: "mr-chidex",
     github: "github.com/mr-chidex",
-    route: `/api/${apiVersion}/tracker`,
+    route: `/api/${apiVersion}`,
   });
 });
 
