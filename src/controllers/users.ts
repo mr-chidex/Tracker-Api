@@ -1,8 +1,10 @@
 import { RequestHandler } from "express";
-import { User } from "../models/user";
+import bcrypt from "bcryptjs";
 
+import { User } from "../models/user";
 import { UserDoc } from "./../libs/types";
-import { ValidateSignUp } from "./../validators/users";
+import { ValidateSignIn, ValidateSignUp } from "./../validators/users";
+import authToken from "../utils/authToken";
 
 export const signUp: RequestHandler = async (req, res) => {
   const { error, value } = ValidateSignUp(req.body);
@@ -30,4 +32,31 @@ export const signUp: RequestHandler = async (req, res) => {
   newUser.save();
 
   res.status(201).json({ message: "signup successful", status: "success" });
+};
+
+export const signIn: RequestHandler = async (req, res) => {
+  const { error, value } = ValidateSignIn(req.body);
+
+  //check for errors
+  if (error)
+    return res.status(422).json({
+      status: "error",
+      message: error.details[0].message,
+    });
+
+  const { email, password }: UserDoc = value;
+
+  const user = await User.findOne({ email });
+
+  if (!user)
+    return res.status(422).json({ message: "email or password is incorrect" });
+
+  const isMatch = await bcrypt.compare(password, user.password);
+
+  if (!isMatch)
+    return res.status(400).json({ message: "email or password is incorrect" });
+
+  const token = authToken(user);
+
+  res.json({ token, status: "success" });
 };

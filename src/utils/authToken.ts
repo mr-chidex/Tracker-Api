@@ -1,11 +1,7 @@
+import { UserDoc } from "./../libs/types";
 const JWT = require("jsonwebtoken");
 
-type userData = {
-  name: string;
-  email: string;
-  password: string;
-  _id: string;
-};
+type userData = UserDoc & { _id: String };
 
 export default (user: userData) => {
   return JWT.sign(
