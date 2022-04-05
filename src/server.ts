@@ -2,7 +2,7 @@ import express, { Application, Request, Response, NextFunction } from "express";
 import morgan from "morgan";
 import dotenv from "dotenv";
 
-import userRoutes from "./routes/user";
+import userRoutes from "./routes/users";
 
 const app: Application = express();
 dotenv.config();

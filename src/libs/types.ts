@@ -1,5 +1,5 @@
 export interface UserDoc {
-  name: string;
+  name?: string;
   email: string;
   password: string;
 }
