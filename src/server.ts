@@ -1,8 +1,14 @@
-import express from "express";
+import mongoose from "mongoose";
 
-const app = express();
+import app from "./index";
+
 const PORT = process.env.PORT || 5000;
 
-app.use(express.json());
-
-app.listen(PORT, () => console.log(`server running at PORT - ${PORT}`));
+//connect db and start server
+mongoose
+  .connect(process.env.DATABASE_URL!)
+  .then(() => {
+    console.log("db connected");
+    app.listen(PORT, () => console.log(`server running at PORT - ${PORT}`));
+  })
+  .catch((err) => console.error(err));
