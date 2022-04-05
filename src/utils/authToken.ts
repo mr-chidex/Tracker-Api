@@ -1,5 +1,5 @@
 import { UserDoc } from "./../libs/types";
-const JWT = require("jsonwebtoken");
+import JWT from "jsonwebtoken";
 
 type userData = UserDoc & { _id: String };
 
@@ -12,7 +12,7 @@ export default (user: userData) => {
       email: user.email,
       iss: "Mr-Chidex",
     },
-    process.env.SECRET_KEY,
+    process.env.SECRET_KEY!,
     { expiresIn: "24h" }
   );
 };
