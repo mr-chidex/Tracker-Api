@@ -13,7 +13,7 @@ app.use(morgan("dev"));
 
 app.use(`/api/${apiVersion}/users`, userRoutes);
 
-app.use("/", (_: Request, res: Response) => {
+app.get("/", (_: Request, res: Response) => {
   res.json({
     success: true,
     name: "mr-chidex",

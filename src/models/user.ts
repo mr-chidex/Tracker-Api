@@ -7,7 +7,7 @@ type UserDocument = Document & UserDoc;
 
 const userSchema = new Schema(
   {
-    email: { type: String, required: true },
+    email: { type: String, required: true, unique: true, lowercase: true },
     password: { type: String, required: true },
     name: { type: String, required: true },
   },
