@@ -3,6 +3,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 
 import userRoutes from "./routes/users";
+import trackRoutes from "./routes/tracks";
 
 const app: Application = express();
 dotenv.config();
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.use(`/api/${apiVersion}/users`, userRoutes);
+app.use(`/api/${apiVersion}/tracks`, trackRoutes);
 
 app.get("/", (_: Request, res: Response) => {
   res.json({
