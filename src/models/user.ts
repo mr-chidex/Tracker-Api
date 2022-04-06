@@ -1,11 +1,9 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcryptjs";
 
-import { UserDoc } from "./../libs/types";
+import { UserDocument } from "./../libs/types";
 
-type UserDocument = Document & UserDoc;
-
-const userSchema = new Schema(
+const userSchema = new Schema<UserDocument>(
   {
     email: { type: String, required: true, unique: true, lowercase: true },
     password: { type: String, required: true },
