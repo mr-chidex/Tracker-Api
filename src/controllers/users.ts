@@ -6,6 +6,11 @@ import { UserDoc } from "./../libs/types";
 import { ValidateSignIn, ValidateSignUp } from "./../validators/users";
 import authToken from "../utils/authToken";
 
+/**
+ * @route - POST api/v1/users/signup
+ * @access - Public
+ * @description - signup a user
+ */
 export const signUp: RequestHandler = async (req, res) => {
   const { error, value } = ValidateSignUp(req.body);
 
@@ -34,6 +39,11 @@ export const signUp: RequestHandler = async (req, res) => {
   res.status(201).json({ message: "signup successful", status: "success" });
 };
 
+/**
+ * @route - POST api/v1/users/signin
+ * @access - Public
+ * @description - signin a user
+ */
 export const signIn: RequestHandler = async (req, res) => {
   const { error, value } = ValidateSignIn(req.body);
 
