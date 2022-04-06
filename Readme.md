@@ -34,6 +34,10 @@ You will need Node.js (version 16 and above) and a node global package installed
 
     $ yarn dev
 
+## Documentation
+
+Postman: [See documentation](https://documenter.getpostman.com/view/11724511/UVyvttnE)
+
 ## Show your support
 
 Give a ⭐️ if you like this project!
