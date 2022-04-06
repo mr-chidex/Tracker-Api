@@ -1,9 +1,8 @@
-import { UserDoc } from "./../libs/types";
 import JWT from "jsonwebtoken";
 
-type userData = UserDoc & { _id: String };
+import { Payload } from "./../libs/types";
 
-export default (user: userData) => {
+export default (user: Payload) => {
   return JWT.sign(
     {
       iat: Date.now(),
